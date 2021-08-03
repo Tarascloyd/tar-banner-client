@@ -1,16 +1,15 @@
 import Button from '../Button/Button';
 import styles from './Header.module.css';
 import cn from 'classnames';
-import {useState, useEffect} from 'react';
+import { useState } from 'react';
 
 interface HeaderProps {
     className: string;
 }
 
 const Header = ({className}: HeaderProps):JSX.Element => {
-    const [focus, setFocus] = useState<String>('banners');
-
     
+    const [focus, setFocus] = useState<String>('banners');
 
     return (
         <header className={cn(styles.header, className)}>
