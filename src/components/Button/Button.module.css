@@ -31,13 +31,17 @@
 }
 
 .primary:hover {
-	background-color: #6344DF;
+	background-color: #4219e7;
 }
 
 .ghost {
-	color: white;
+	color: #7351F5;
 	border: 1px solid #EBEBEB;
 	background: none;
+}
+
+.ghost svg {
+	fill: #7351F5;
 }
 
 .ghost:hover {
@@ -45,9 +49,13 @@
 	background-color: #7351F5;
 }
 
+.ghost:hover svg {
+	fill: white;
+}
+
 .arrow {
 	display: inline-block;
-	margin-left: 10px;
+	margin-left: 5px;
 }
 
 .down {
