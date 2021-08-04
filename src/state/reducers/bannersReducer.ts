@@ -1,16 +1,18 @@
-import { ActionTypeCategories } from '../action-types';
-import { ActionCategories } from '../actions';
+import { ActionTypeBanners } from '../action-types';
+import { ActionBanners } from '../actions';
 
-interface Category {
+interface Banner {
     id: number;
     name: string;
-    reqName: string;
+    price: number;
+    categoryId: number;
+    content: string;
 }
 
-interface CategoriesState {
+interface BannersState {
   loading: boolean;
   error: string | null;
-  data: Category[];
+  data: Banner[];
 }
 
 const initialState = {
@@ -20,15 +22,15 @@ const initialState = {
 };
 
 const reducer = (
-  state: CategoriesState = initialState,
-  action: ActionCategories
-): CategoriesState => {
+  state: BannersState = initialState,
+  action: ActionBanners
+): BannersState => {
   switch (action.type) {
-    case ActionTypeCategories.SEARCH_CATEGORIES:
+    case ActionTypeBanners.SEARCH_BANNERS:
       return { loading: true, error: null, data: [] };
-    case ActionTypeCategories.SEARCH_CATEGORIES_SUCCESS:
+    case ActionTypeBanners.SEARCH_BANNERS_SUCCESS:
       return { loading: false, error: null, data: action.payload };
-    case ActionTypeCategories.SEARCH_CATEGORIES_ERROR:
+    case ActionTypeBanners.SEARCH_BANNERS_ERROR:
       return { loading: false, error: action.payload, data: [] };
     default:
       return state;

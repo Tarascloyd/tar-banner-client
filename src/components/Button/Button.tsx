@@ -15,13 +15,13 @@ interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
 const Button = ({ appearance, arrow = 'none', size = 'small', children, link = 'about', ...props }: ButtonProps): JSX.Element => {
 	return (
 		<button className = {cn(styles.button, {
-			[styles.primary]: appearance == 'primary',
-			[styles.ghost]: appearance == 'ghost',
+			[styles.primary]: appearance === 'primary',
+			[styles.ghost]: appearance === 'ghost',
 		})} {...props}>
 			{children}
 			{arrow !== 'none' && <span className={cn(styles.arrow, {
-			[styles.right]: arrow == 'right',
-			[styles.down]: arrow == 'down',
+			[styles.right]: arrow === 'right',
+			[styles.down]: arrow === 'down',
 		})}>
 				<Arrow/>
 			</span>}

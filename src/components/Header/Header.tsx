@@ -1,7 +1,8 @@
 import Button from '../Button/Button';
 import styles from './Header.module.css';
 import cn from 'classnames';
-import { useState } from 'react';
+import { useTypedSelector } from '../../hooks/useTypedSelector';
+import { useActions } from '../../hooks/useActions';
 
 interface HeaderProps {
     className: string;
@@ -9,18 +10,21 @@ interface HeaderProps {
 
 const Header = ({className}: HeaderProps):JSX.Element => {
     
-    const [focus, setFocus] = useState<String>('banners');
+    const { changeFocus } = useActions();
+    const { focus } = useTypedSelector(
+        (state) => state.focus
+    );
 
     return (
         <header className={cn(styles.header, className)}>
-            <Button appearance = {focus == 'banners' ? 'primary' : 'ghost'}
-                    arrow = {focus == 'banners' ? 'down' : 'right'}
-                    onClick={() => setFocus('banners')}>
+            <Button appearance = {focus === 'Banners' ? 'primary' : 'ghost'}
+                    arrow = {focus === 'Banners' ? 'down' : 'right'}
+                    onClick={() => changeFocus('Banners')}>
                 Banners
             </Button>
-            <Button appearance = {focus == 'categories' ? 'primary' : 'ghost'}
-                    arrow = {focus == 'categories' ? 'down' : 'right'}
-                    onClick={() => setFocus('categories')}>
+            <Button appearance = {focus === 'Categories' ? 'primary' : 'ghost'}
+                    arrow = {focus === 'Categories' ? 'down' : 'right'}
+                    onClick={() => changeFocus('Categories')}>
                 Categories
             </Button>  
         </header>  

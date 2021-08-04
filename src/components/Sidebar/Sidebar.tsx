@@ -1,6 +1,6 @@
 import styles from './Sidebar.module.css';
 import cn from 'classnames';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
 
@@ -12,21 +12,30 @@ interface SidebarProps {
 const Sidebar = ({className}: SidebarProps):JSX.Element => {
     
     const [name, setName] = useState('');
-    const { searchCategories } = useActions();
+    const { searchCategories, searchBanners } = useActions();
+    
+    const { focus } = useTypedSelector(
+        (state) => state.focus
+    );
     const { data, error, loading } = useTypedSelector(
-        (state) => state.categories
+        (state) => focus === 'Categories' ? state.categories : state.banners
     );
 
     const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        searchCategories(name);
+        focus === 'Categories' ? searchCategories(name) : searchBanners(name);
     };
+
+    useEffect(() => {
+        focus === 'Categories' ? searchCategories(name) : searchBanners(name);   
+    }, [focus]);
     
     return (
         <div className={cn(styles.main, className)}>
+            <h2>{focus}:</h2>
             <form onSubmit={onSubmit}>
-                <input value={name} onChange={(e) => setName(e.target.value)} />
+                <input value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter a name'/>
                 <button>Search</button>
             </form>
             {error && <h3>{error}</h3>}
