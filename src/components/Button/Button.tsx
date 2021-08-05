@@ -10,13 +10,17 @@ interface ButtonProps extends DetailedHTMLProps<ButtonHTMLAttributes<HTMLButtonE
 	children: ReactNode;
 	size?: 'small' | 'medium' | 'large';
 	link?: string;
+	className?: string;
 }
 
-const Button = ({ appearance, arrow = 'none', size = 'small', children, link = 'about', ...props }: ButtonProps): JSX.Element => {
+const Button = ({ appearance, arrow = 'none', size = 'small', children, link = 'about', className, ...props }: ButtonProps): JSX.Element => {
 	return (
-		<button className = {cn(styles.button, {
+		<button className = {cn(styles.button, className, {
 			[styles.primary]: appearance === 'primary',
 			[styles.ghost]: appearance === 'ghost',
+			[styles.small]: size === 'small',
+			[styles.medium]: size === 'medium',
+			[styles.large]: size === 'large',
 		})} {...props}>
 			{children}
 			{arrow !== 'none' && <span className={cn(styles.arrow, {

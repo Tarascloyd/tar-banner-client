@@ -3,6 +3,7 @@ import cn from 'classnames';
 import { useState, useEffect } from 'react';
 import { useTypedSelector } from '../../hooks/useTypedSelector';
 import { useActions } from '../../hooks/useActions';
+import Button from '../Button/Button';
 
 
 interface SidebarProps {
@@ -32,7 +33,7 @@ const Sidebar = ({className}: SidebarProps):JSX.Element => {
     }, [focus]);
     
     return (
-        <div className={cn(styles.main, className)}>
+        <div className={cn(styles.sidebar, className)}>
             <h2>{focus}:</h2>
             <form onSubmit={onSubmit}>
                 <input value={name} onChange={(e) => setName(e.target.value)} placeholder='Enter a name'/>
@@ -40,7 +41,10 @@ const Sidebar = ({className}: SidebarProps):JSX.Element => {
             </form>
             {error && <h3>{error}</h3>}
             {loading && <h3>Loading...</h3>}
-            {!error && !loading && data.map(({name}) => <div key={name}>{name}</div>)}
+            {!error && !loading && data.map(({name}) => <div className = {styles.item} key={name}>{name}</div>)}
+            <Button className = {styles.button} appearance = 'ghost'>
+                Crete new
+            </Button>
         </div>
     );
 }
